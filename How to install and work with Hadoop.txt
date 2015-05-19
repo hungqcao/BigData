@@ -1,0 +1,42 @@
+1. Install the lastest version of VirtualBox (https://www.virtualbox.org/wiki/Downloads)
+2. Install Hortonworks Sandbox VM (http://hortonworks.com/hdp/downloads/)
+3. Install JDK (http://www.oracle.com/technetwork/java/javase/downloads/index.html) and Eclipse (https://eclipse.org/downloads/)
+4. There are 2 ways to build eclipse environment
+    - Use Maven project in Eclipse (Step 6-8)
+    - Manual (Step 4-5)
+4. Download Hadoop common libraries from Apache Hadoop site
+5. Create new project in Eclipse and add the following libraries:
+    - share/hadoop/common/hadoop-common-*.jar
+    - share/hadoop/mapreduce/hadoop-mapreduce-client-core-*.jar
+    - share/hadoop/mapreduce/hadoop-mapreduce-client-jobclient-*.jar
+    - commons-cli-*.jar
+    - commons-collections-*.jar
+    - commons-logging-*.jar
+    - guava-*.jar
+    - hadoop-common-*.jar
+    - hadoop-mapreduce-client-core-*.jar
+    - hadoop-mapreduce-client-jobclient-*.jar
+    - log4j-*.jar
+6. Open elipse and create a new Java project.
+7. Right click project -> Configuration -> Convert to Maven project -> OK
+8. Open pom.xml and add the following values:
+    <dependencies>
+      <dependency>
+          <groupId>org.apache.hadoop</groupId>
+          <artifactId>hadoop-client</artifactId>
+          <version>2.6.0</version>
+      </dependency>
+  </dependencies>
+9. Create Mapper class
+10. Create Reducer class
+11. Create Main application
+12. Export to Runnable JAR file from project.
+13. Create VirtualBox Shared Folder and copy jar file to it.
+14. Inside virtualbox, copy jar file in to hue Home directory using command line likes cp /media/sf_Shared/wordcount.jar /usr/lib/hue/
+15. Remember to chmod 777 it.
+16. Create input text file to test.
+17. Go to http://127.0.0.1:8000/filebrowser/view/user/hue/ and create wordcount folder and upload the input file into it.
+18. Run the jar program by using command line likes:
+    hadoop jar wordcount.jar /user/hue/wordcount /user/hue/wordcount
+19. Go to output folder and check the result.
+20. After successfully running the program, for quickly submit jobs, we can run hadoop command directly in the /media/sf_<share folder>/ under “root” user. This way, it will save us a lot of command for copying and switching between root and hue users. ( It doesn’t make anything different, except Job browser will be seen as “root”, not “hue”)
